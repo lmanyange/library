@@ -25,10 +25,12 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-#    - name: Push the artefact to S3 bucket
-#      uses: medlypharmacy/s3-artifacts-action@master
-#      with:
-#        aws_access_key_id: ${{ secrets.S3_BUILD_ARTIFACTS_ACCESS_KEY_ID}}
-#        aws_secret_access_key: ${{ secrets.S3_BUILD_ARTIFACTS_SECRET_ACCESS_KEY}}
-#        source_path: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
+    - name: Push the artefact to S3 bucket
+      uses: koraykoska/s3-upload-github-action@master
+      with:
+        aws-access-key-id: ${{ secrets.S3_BUILD_ARTIFACTS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{ secrets.S3_BUILD_ARTIFACTS_SECRET_ACCESS_KEY}}
+        aws-region: 'us-east-1'
+        aws-bucket: ${{ secrets.S3_BUCKET_NAME }}
+        file-path: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
 
