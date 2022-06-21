@@ -6,14 +6,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import za.co.absa.obs.entity.security.User;
 
-import java.io.Serial;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private final Long id;
