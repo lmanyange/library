@@ -32,7 +32,8 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-1'
-        aws-bucket: ${{ secrets.S3_BUCKET_NAME }}
+#        aws-bucket: ${{ secrets.S3_BUCKET_NAME }}
+        aws-bucket: 'absa-obs'
         file-path: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
         output-file-url: 'true'
     - name: Show URL
