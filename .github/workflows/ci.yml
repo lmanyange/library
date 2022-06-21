@@ -26,7 +26,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Push the build artefact to S3 bucket
-      uses: koraykoska/s3-upload-github-action@master
+      uses: hkusu/s3-upload-action@v2
       id: upload
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
