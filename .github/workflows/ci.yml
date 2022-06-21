@@ -26,11 +26,15 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Push the artefact to S3 bucket
-    - uses: koraykoska/s3-upload-github-action@master
+      uses: koraykoska/s3-upload-github-action@master
+      id: upload
       with:
-        aws-access-key-id: ${{ secrets.S3_BUILD_ARTIFACTS_ACCESS_KEY_ID}}
-        aws-secret-access-key: ${{ secrets.S3_BUILD_ARTIFACTS_SECRET_ACCESS_KEY}}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-1'
         aws-bucket: ${{ secrets.S3_BUCKET_NAME }}
         file-path: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
+        output-file-url: 'true'
+    - name: Show URL
+      run: echo '${{ steps.upload.outputs.file-url }}'
 
