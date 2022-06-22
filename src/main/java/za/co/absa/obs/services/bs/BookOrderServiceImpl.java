@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.absa.obs.entity.bs.BookOrder;
 import za.co.absa.obs.model.bs.BookOrderRequest;
+import za.co.absa.obs.model.bs.BookOrderRetrievalRequest;
 import za.co.absa.obs.repository.ob.BookOrderRepository;
 
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class BookOrderServiceImpl implements BookOrderService {
     }
 
     @Override
-    public List<BookOrder> findBookOrderByIsbn(BookOrderRequest bookOrderRequest) {
+    public List<BookOrder> findBookOrderByIsbn(BookOrderRetrievalRequest bookOrderRequest) {
         return bookOrderRepository.findByIsbn(bookOrderRequest.getIsbn());
     }
 }

@@ -7,6 +7,7 @@ import za.co.absa.obs.control.security.AuthController;
 import za.co.absa.obs.entity.bs.BookOrder;
 import za.co.absa.obs.model.bs.BookOrderRequest;
 import za.co.absa.obs.model.bs.BookOrderResponse;
+import za.co.absa.obs.model.bs.BookOrderRetrievalRequest;
 import za.co.absa.obs.services.bs.BookOrderService;
 
 import javax.validation.Valid;
@@ -35,7 +36,7 @@ public class BookStoreApi {
     }
 
     @GetMapping("/orders/retrieve/isbn")
-    public ResponseEntity<BookOrderResponse> retrieveBookOrderByIsbn(@Valid @RequestBody BookOrderRequest bookOrderRequest) {
+    public ResponseEntity<BookOrderResponse> retrieveBookOrderByIsbn(@Valid @RequestBody BookOrderRetrievalRequest bookOrderRequest) {
         List<BookOrder> bookOrderByIsbn = bookOrderService.findBookOrderByIsbn(bookOrderRequest);
         if (bookOrderByIsbn.isEmpty()) {
             return ResponseEntity.ok(
