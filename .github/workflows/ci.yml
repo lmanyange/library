@@ -47,7 +47,7 @@ jobs:
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: obs-test
         environment_name: Obstest-env
-        version_label: obs-test-source-6
+        version_label: obs-test-source-7
         region: us-east-1
         deployment_package: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
 
