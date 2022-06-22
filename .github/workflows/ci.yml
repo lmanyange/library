@@ -1,0 +1,53 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      id: setup
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      id: build
+      run: mvn -B package --file pom.xml
+
+    - name: Push the build Artefact to S3 bucket
+      uses: hkusu/s3-upload-action@v2
+      id: upload
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: 'us-east-1'
+        aws-bucket: 'absa-obs'
+        file-path: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
+        output-file-url: 'true'
+    - name: Show URL
+      run: echo '${{ steps.upload.outputs.file-url }}'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: obs-test
+        environment_name: Obstest-env
+        version_label: obs-test-source-7
+        region: us-east-1
+        deployment_package: '/home/runner/work/obs/obs/target/obs-0.0.1-SNAPSHOT.jar'
+

@@ -7,7 +7,6 @@ import za.co.absa.obs.control.security.AuthController;
 import za.co.absa.obs.entity.bs.BookOrder;
 import za.co.absa.obs.model.bs.BookOrderRequest;
 import za.co.absa.obs.model.bs.BookOrderResponse;
-import za.co.absa.obs.model.security.MessageResponse;
 import za.co.absa.obs.services.bs.BookOrderService;
 
 import javax.validation.Valid;
@@ -72,6 +71,5 @@ public class BookStoreApi {
                         .message("All Orders successfully fetched")
                         .build()
         );
-//        return authController.registerUser(signUpRequest);
     }
 }

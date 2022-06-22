@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api"+ HealthApi.ENDPOINT)
+@RequestMapping(path = "/api" + HealthApi.ENDPOINT)
 public class HealthApi {
 
     public static final String ENDPOINT = "/health";
