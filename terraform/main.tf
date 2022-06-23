@@ -24,14 +24,14 @@ resource "aws_elastic_beanstalk_application_version" "beanstalk_obs_version" {
 resource "aws_elastic_beanstalk_environment" "beanstalk_obs_env" {
   name = "obs-dev"
   application = aws_elastic_beanstalk_application.beanstalk_obs.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.2.15 running Corretto 11"
+  solution_stack_name = "64bit Amazon Linux 2 v3.2.16 running Corretto 11"
   version_label = aws_elastic_beanstalk_application_version.beanstalk_obs_version.name
 
-#  setting {
-#    name = "SERVER_PORT"
-#    namespace = "aws:elasticbeanstalk:application:environment"
-#    value = "5000"
-#  }
+  setting {
+    name = "SERVER_PORT"
+    namespace = "aws:elasticbeanstalk:application:environment"
+    value = "5000"
+  }
 
   setting {
     namespace = "aws:ec2:instances"
